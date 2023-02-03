@@ -1,0 +1,24 @@
+http {
+
+        ##
+        # Basic Settings
+        ##
+
+       upstream myservers {
+               server localhost:8080;
+       }
+
+        server {
+                listen 80 default_server;
+                root /var/www/localhost/;
+
+                location /signin/ {
+                        index index.html;
+                }
+                location / {
+                       proxy_pass http://myservers;
+                }
+        }
+
+
+# Комментарии: файл index.html был размещен в папке /var/www/localhost/signin/
